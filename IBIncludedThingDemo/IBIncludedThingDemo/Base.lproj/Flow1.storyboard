@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jLP-Ey-T2O">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--First-->
+        <scene sceneID="aPg-5L-7vd">
+            <objects>
+                <viewController id="h4W-Ja-ONY" customClass="Flow1Controller" customModule="IBIncludedThingDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fwA-4k-ejf"/>
+                        <viewControllerLayoutGuide type="bottom" id="YAO-sG-J7O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O5n-yI-4Su" customClass="IBIncludedThingPreview" customModule="IBIncludedThingDemo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="First"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <navigationItem key="navigationItem" title="First" id="Fh9-fe-aXb"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="First"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="l0n-ac-ylC" kind="show" identifier="Push Second" id="REe-Hy-GQc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0t-Ws-tHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1141" y="338"/>
+        </scene>
+        <!--Second-->
+        <scene sceneID="uka-WQ-VkQ">
+            <objects>
+                <viewController id="l0n-ac-ylC" customClass="Flow1Controller" customModule="IBIncludedThingDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MYP-wd-Lu3"/>
+                        <viewControllerLayoutGuide type="bottom" id="8an-IQ-TB5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jU5-Cf-jrO" customClass="IBIncludedThingPreview" customModule="IBIncludedThingDemo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="Second"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <navigationItem key="navigationItem" title="Second" id="cMZ-6E-ibV"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="Second"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="WLD-aI-hn7" kind="presentation" identifier="Push Third" id="pKe-ib-TzB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MMR-lz-MOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1833" y="338"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1hk-6y-Y28">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jLP-Ey-T2O" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vwj-ff-3rX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h4W-Ja-ONY" kind="relationship" relationship="rootViewController" id="fxA-Qw-0Mv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFU-D7-Rii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="398" y="338"/>
+        </scene>
+        <!--Included Thing-->
+        <scene sceneID="r3b-3A-eAb">
+            <objects>
+                <viewController id="WLD-aI-hn7" customClass="IBIncludedThing" customModule="IBIncludedThingDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Okr-ef-FJQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cb-zm-o7g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AuC-6k-hge" customClass="IBIncludedThingPreview" customModule="IBIncludedThingDemo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="Flow2"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="incStoryboard" value="Flow2"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWC-Pm-ghp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2521" y="338"/>
+        </scene>
+    </scenes>
+</document>
