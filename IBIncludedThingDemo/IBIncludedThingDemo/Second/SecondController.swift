@@ -18,6 +18,10 @@ class SecondController: UIViewController {
     @IBAction func openThirdPage(sender: UIButton) {
         parentViewController?.performSegueWithIdentifier("Push Third", sender: sender)
     }
+    
+    @IBAction func openThirdPageAlt(sender: UIButton) {
+        parentViewController?.performSegueWithIdentifier("Push Third (alternate with Storyboard reference)", sender: sender)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

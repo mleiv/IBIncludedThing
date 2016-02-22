@@ -9,7 +9,7 @@
         <!--Second Controller-->
         <scene sceneID="Gnh-Af-9Im">
             <objects>
-                <viewController storyboardIdentifier="Root" id="Xi2-UF-AUH" customClass="SecondController" customModule="IBIncludedStoryboardDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Root" id="Xi2-UF-AUH" customClass="SecondController" customModule="IBIncludedThingDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mqf-Pa-wuC"/>
                         <viewControllerLayoutGuide type="bottom" id="DES-lE-11K"/>
@@ -18,23 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mOh-uL-m8f">
-                                <rect key="frame" x="153.5" y="157.5" width="293.5" height="165.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mOh-uL-m8f">
+                                <rect key="frame" x="150" y="197" width="301" height="206"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Flow, Second Scene" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZj-jM-4LF">
-                                        <rect key="frame" x="0.0" y="0.0" width="293.5" height="32.5"/>
+                                        <rect key="frame" x="4" y="0.0" width="294" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value sent from First: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCJ-2K-Gnw">
-                                        <rect key="frame" x="48.5" y="42.5" width="196.5" height="19.5"/>
+                                        <rect key="frame" x="53" y="43" width="197" height="20"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkE-4k-uT4">
-                                        <rect key="frame" x="68" y="72" width="158" height="30"/>
+                                        <rect key="frame" x="72" y="72" width="158" height="30"/>
                                         <state key="normal" title="Open Third Storyboard">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -42,14 +42,23 @@
                                             <action selector="openThirdPage:" destination="Xi2-UF-AUH" eventType="touchUpInside" id="vL0-cf-X83"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cf-eb-qiO">
+                                        <rect key="frame" x="0.0" y="112" width="301" height="30"/>
+                                        <state key="normal" title="Open Third with iOS 9 Storyboard reference">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openThirdPageAlt:" destination="Xi2-UF-AUH" eventType="touchUpInside" id="Q43-iM-Spu"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type value here to send it along:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bti-cb-N2a">
-                                        <rect key="frame" x="61.5" y="112" width="170.5" height="13.5"/>
+                                        <rect key="frame" x="66" y="152" width="171" height="14"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C1f-41-BN7">
-                                        <rect key="frame" x="22" y="135.5" width="250" height="30"/>
+                                        <rect key="frame" x="26" y="176" width="250" height="30"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="kCA-PA-Mxp"/>
