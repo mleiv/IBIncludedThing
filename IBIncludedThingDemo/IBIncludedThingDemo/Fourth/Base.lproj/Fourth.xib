@@ -6,9 +6,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FourthController" customModule="IBIncludedStoryboardDemo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FourthController" customModule="IBIncludedThingDemo" customModuleProvider="target">
             <connections>
                 <outlet property="label" destination="Jmq-co-f4j" id="GpQ-kb-9jf"/>
+                <outlet property="sixthIncludedThing" destination="JPe-KA-cz1" id="SGN-QQ-VVy"/>
                 <outlet property="textField" destination="HCw-9F-QYT" id="lEv-rq-Kee"/>
                 <outlet property="view" destination="P9n-3U-7Wc" id="Xih-0L-NSM"/>
             </connections>
@@ -33,7 +34,7 @@
                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrC-uc-ATr" customClass="IBIncludedSubThing" customModule="IBIncludedStoryboardDemo" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrC-uc-ATr" customClass="IBIncludedSubThing" customModule="IBIncludedThingDemo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="72" width="540" height="60"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -43,7 +44,7 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="incNib" value="Fifth"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPe-KA-cz1" customClass="IBIncludedSubThing" customModule="IBIncludedStoryboardDemo" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPe-KA-cz1" customClass="IBIncludedSubThing" customModule="IBIncludedThingDemo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="142" width="540" height="150"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>

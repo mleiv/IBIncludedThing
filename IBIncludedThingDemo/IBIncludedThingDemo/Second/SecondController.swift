@@ -29,7 +29,7 @@ class SecondController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        findChildViewControllerType(ThirdController.self, inController: segue.destinationViewController) { controller in
+        segue.destinationViewController.findChildViewControllerType(ThirdController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }

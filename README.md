@@ -48,3 +48,19 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 ```
 
 *Note: prepareForSegue does not work for IBIncludedSubThing, because only the root controller of a scene is available at the time prepareForSegue is called.*
+
+## Caution: Shielding data from Interface Builder
+
+Because IBIncludedThing loads up your view controller in Interface Builder, it takes a lot more work than your average storyboard scene. This means that you get great visual feedback, often getting a view of fully assembled pages that previously required running the app to see. But the downside is that things often run which Interface Builder is never meant to see. Any code that references CoreData, NSNotifications, API calls, listeners and/or signals, and dynamic actions should probably be shielded from Interface Builder, for the sake of speed loading if nothing else. 
+
+I added an easy boolean check if you want to include/exclude code based on whether you are inside Interface Builder or not:
+
+```swift
+if !UIWindow.isInterfaceBuilder { 
+	// load up some core data
+}
+```
+
+## How is this better than iOS Containers and Storyboard References?
+
+Firstly, IBIncludedThing provides immediate visual feedback. Often you don't even have to run your app to see what final scenes will look like (especially if you provide dummy data for the Interface Builder to use in display). It is also easier to access and segue than with Containers, which I found caused many headaches and initialized in weird ways. But there are downsides, like the additional layers of views and view controllers. Also, containers certainly make it easier to wire up segue actions than the above mentioned route. I would love to hear other feedback, though, and also pointers for ways I could use Containers and Storyboard References better!
