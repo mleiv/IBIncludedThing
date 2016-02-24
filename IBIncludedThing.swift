@@ -263,15 +263,16 @@ extension IBIncludedThingLoadable {
         includedView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
     }
     
-    /// Programmatic reloading of a storyboard inside the same IBIncludedSubThing view
+    /// Programmatic reloading of a storyboard inside the same IBIncludedSubThing view.
+    /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
     public func reloadWithNewStoryboard(incStoryboard: String, sceneId: String?) {
+        let parentController = (self as? UIViewController) ?? (self as? IBIncludedSubThing)?.parentController
         guard incStoryboard != self.incStoryboard || sceneId != self.sceneId,
-            let parentController = includedController?.parentViewController,
-            let parentView = includedController?.view.superview else {
+            let parentView = (self as? UIView) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        parentView.subviews.forEach { $0.removeFromSuperview() }
+        includedController?.view.removeFromSuperview()
         includedController?.removeFromParentViewController()
         // reset to new values
         self.incStoryboard = incStoryboard
@@ -282,15 +283,16 @@ extension IBIncludedThingLoadable {
         attachThing(toController: parentController, toView: parentView)
     }
     
-    /// Programmatic reloading of a nib inside the same IBIncludedSubThing view
+    /// Programmatic reloading of a nib inside the same IBIncludedSubThing view.
+    /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
     public func reloadWithNewNib(incNib: String, nibController: String?) {
+        let parentController = (self as? UIViewController) ?? (self as? IBIncludedSubThing)?.parentController
         guard incNib != self.incNib || nibController != self.nibController,
-            let parentController = includedController?.parentViewController,
-            let parentView = includedController?.view.superview else {
+            let parentView = (self as? IBIncludedSubThing) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        parentView.subviews.forEach { $0.removeFromSuperview() }
+        includedController?.view.removeFromSuperview()
         includedController?.removeFromParentViewController()
         // reset to new values
         self.incStoryboard = nil
@@ -315,4 +317,16 @@ extension UIViewController {
             }
         }
     }
+}
+
+extension UIWindow {
+
+    static var isInterfaceBuilder: Bool {
+        #if !TARGET_INTERFACE_BUILDER
+            return true
+        #else
+            return false
+        #endif
+    }
+
 }
