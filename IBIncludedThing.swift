@@ -181,6 +181,7 @@ public protocol IBIncludedThingLoadable: class {
     weak var includedController: UIViewController? { get set }
     // main:
     func attachThing(toController parentController: UIViewController?, toView parentView: UIView?)
+    func detachThing()
     // supporting:
     func getThingController(inBundle bundle: NSBundle) -> UIViewController?
     func attachThingController(controller: UIViewController?, toParent parentController: UIViewController?)
@@ -203,6 +204,16 @@ extension IBIncludedThingLoadable {
         if let parentView = parentView {
             attachThingControllerView(includedController.view, toView: parentView)
         }
+    }
+    
+    /// Main function to remove the included content.
+    public func detachThing() {
+        includedController?.view.removeFromSuperview()
+        includedController?.removeFromParentViewController()
+        self.incStoryboard = nil
+        self.sceneId = nil
+        self.incNib = nil
+        self.nibController = nil
     }
     
     /// Internal: loads the controller from the storyboard or nib
@@ -266,14 +277,13 @@ extension IBIncludedThingLoadable {
     /// Programmatic reloading of a storyboard inside the same IBIncludedSubThing view.
     /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
     public func reloadWithNewStoryboard(incStoryboard: String, sceneId: String?) {
-        let parentController = (self as? UIViewController) ?? (self as? IBIncludedSubThing)?.parentController
+        let parentController = (self as? IBIncludedThing) ?? (self as? IBIncludedSubThing)?.parentController
         guard incStoryboard != self.incStoryboard || sceneId != self.sceneId,
-            let parentView = (self as? UIView) ?? parentController?.view else {
+            let parentView = (self as? IBIncludedSubThing) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        includedController?.view.removeFromSuperview()
-        includedController?.removeFromParentViewController()
+        detachThing()
         // reset to new values
         self.incStoryboard = incStoryboard
         self.sceneId = sceneId
@@ -286,14 +296,13 @@ extension IBIncludedThingLoadable {
     /// Programmatic reloading of a nib inside the same IBIncludedSubThing view.
     /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
     public func reloadWithNewNib(incNib: String, nibController: String?) {
-        let parentController = (self as? UIViewController) ?? (self as? IBIncludedSubThing)?.parentController
+        let parentController = (self as? IBIncludedThing) ?? (self as? IBIncludedSubThing)?.parentController
         guard incNib != self.incNib || nibController != self.nibController,
             let parentView = (self as? IBIncludedSubThing) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        includedController?.view.removeFromSuperview()
-        includedController?.removeFromParentViewController()
+        detachThing()
         // reset to new values
         self.incStoryboard = nil
         self.sceneId = nil
