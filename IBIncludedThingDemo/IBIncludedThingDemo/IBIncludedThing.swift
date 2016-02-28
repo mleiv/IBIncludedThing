@@ -284,6 +284,7 @@ extension IBIncludedThingLoadable {
         }
         // cleanup old stuff
         detachThing()
+        self.includedController = nil
         // reset to new values
         self.incStoryboard = incStoryboard
         self.sceneId = sceneId
@@ -303,6 +304,7 @@ extension IBIncludedThingLoadable {
         }
         // cleanup old stuff
         detachThing()
+        self.includedController = nil
         // reset to new values
         self.incStoryboard = nil
         self.sceneId = nil
