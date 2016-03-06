@@ -333,7 +333,7 @@ extension UIViewController {
 extension UIWindow {
 
     static var isInterfaceBuilder: Bool {
-        #if !TARGET_INTERFACE_BUILDER
+        #if TARGET_INTERFACE_BUILDER
             return true
         #else
             return false
