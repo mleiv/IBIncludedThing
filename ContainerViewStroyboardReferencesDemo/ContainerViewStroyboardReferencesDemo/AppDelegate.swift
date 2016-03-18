@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ContainerViewStoryboardReferenceComparisonContainerViewStoryboardReferenceDemo
+//  ContainerViewStroyboardReferencesDemo
 //
 //  Created by Emily Ivie on 3/18/16.
 //  Copyright © 2016 urdnot. All rights reserved.

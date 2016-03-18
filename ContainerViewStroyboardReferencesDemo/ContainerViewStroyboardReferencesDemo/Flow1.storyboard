@@ -8,7 +8,7 @@
         <!--First-->
         <scene sceneID="aPg-5L-7vd">
             <objects>
-                <viewController id="h4W-Ja-ONY" customClass="Flow1Controller" customModule="ContainerViewStoryboardReferenceComparisonContainerViewStoryboardReferenceDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="h4W-Ja-ONY" customClass="Flow1Controller" customModule="ContainerViewStroyboardReferencesDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fwA-4k-ejf"/>
                         <viewControllerLayoutGuide type="bottom" id="YAO-sG-J7O"/>
@@ -52,7 +52,7 @@
         <!--Second-->
         <scene sceneID="uka-WQ-VkQ">
             <objects>
-                <viewController id="l0n-ac-ylC" customClass="Flow1Controller" customModule="ContainerViewStoryboardReferenceComparisonContainerViewStoryboardReferenceDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="l0n-ac-ylC" customClass="Flow1Controller" customModule="ContainerViewStroyboardReferencesDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MYP-wd-Lu3"/>
                         <viewControllerLayoutGuide type="bottom" id="8an-IQ-TB5"/>
