@@ -1,8 +1,8 @@
 //
 //  ThirdController.swift
-//  IBIncludedThingDemo
+//  ContainerViewStoryboardReferenceDemo
 //
-//  Created by Emily Ivie on 2/20/16.
+//  Created by Emily Ivie on 3/18/16.
 //  Copyright © 2016 urdnot. All rights reserved.
 //
 
@@ -16,18 +16,13 @@ class ThirdController: UIViewController {
     var sentValue: String = "None"
 
     @IBAction func openFourthPage(sender: UIButton) {
+        (parentViewController as? Flow2Controller)?.sentValue = textField.text
         parentViewController?.performSegueWithIdentifier("Push Fourth", sender: sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         label?.text = "Value sent from Second: \(!sentValue.isEmpty ? sentValue : "None")"
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController.findChildViewControllerType(FourthController.self) { controller in
-            controller.sentValue = self.textField?.text ?? ""
-        }
     }
     
 }

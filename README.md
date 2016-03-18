@@ -2,7 +2,15 @@
 
 **An iOS Swift class to embed storyboards and nibs and preview them in Interface Builder**
 
-Storyboards can easily get too large and they are slow and difficut to collaborate on without conflicts. IBIncludedStoryboard allows developers to break up their application into sensible chunks and link the storyboards visually. It also allows for embedding of nibs and storyboards inside other content, and provides a mechanism for easily locating child controllers to configure data.
+Storyboards can easily get too large and they are slow and difficult to collaborate on without conflicts. IBIncludedThing allows developers to break up their application into sensible chunks and link the storyboards visually. It also allows for embedding of nibs and storyboards inside other content, and provides a mechanism for easily locating child controllers to configure data.
+
+## News 2016-03-18
+
+I added some functions to allow you to change the included pages at will.
+```swift
+	myIBIncludedStorboard.reloadWithNewStoryboard(incStoryboard: "newStoryboard", sceneId: "newScene")
+	myIBIncludedNib.reloadWithNewNib(incNib: "newNib", nibController: "newController")
+
 
 ## Including in Your App
 
@@ -41,7 +49,7 @@ Often, prepareForSegue is used to share data between view controllers. Because I
 
 ```swift
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        findChildViewControllerType(SecondController.self, inController: segue.destinationViewController) { controller in
+        segue.destinationViewController?.findChildViewControllerType(SecondController.self) { controller in
             controller.sentValue = self.textField?.text
         }
     }
@@ -63,4 +71,6 @@ if !UIWindow.isInterfaceBuilder {
 
 ## How is this better than iOS Containers and Storyboard References?
 
-Firstly, IBIncludedThing provides immediate visual feedback. Often you don't even have to run your app to see what final scenes will look like (especially if you provide dummy data for the Interface Builder to use in display). It is also easier to access and segue than with Containers, which I found caused many headaches and initialized in weird ways. But there are downsides, like the additional layers of views and view controllers. Also, containers certainly make it easier to wire up segue actions than the above mentioned route. I would love to hear other feedback, though, and also pointers for ways I could use Containers and Storyboard References better!
+Firstly, IBIncludedThing provides immediate visual feedback. Often you don't even have to run your app to see what final scenes will look like (especially if you provide dummy data for the Interface Builder to use in display). It is also easier to access and segue than with Containers (IMO). But there are downsides, like the additional layers of views and view controllers. 
+
+I've included a comparison project utilizing Container Views and Storyboard References. Many of the benefits of using flows and pages remain, and some people prefer the prepareForSegue method for accessing embedded containers. So, if you don't need preview, it's a pretty good way to go.

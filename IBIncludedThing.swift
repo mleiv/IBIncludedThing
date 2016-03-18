@@ -93,6 +93,27 @@ public class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
     /// This would be private, but the protocol needs it.
     public weak var parentController: UIViewController?
     
+//    /// Convenience initializer for programmatic inclusion
+//    public init?(incStoryboard: String? = nil, sceneId: String? = nil, incNib: String? = nil, nibController: String? = nil, intoView parentView: UIView? = nil, intoController parentController: UIViewController? = nil) {
+//        self.incStoryboard = incStoryboard
+//        self.sceneId = sceneId
+//        self.incNib = incNib
+//        self.nibController = nibController
+//        self.parentController = parentController
+//        super.init(frame: CGRectZero)
+//        guard incStoryboard != nil || incNib != nil else {
+//            return nil
+//        }
+//        // then also pin this IBIncludedSubThing to a parent view if so requested:
+//        if let view = parentView ?? parentController?.view {
+//            attachThingControllerView(self, toView: view)
+//        }
+//    }
+//
+//    public required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     /// Initializes the IBIncludedSubThing for preview inside Xcode.
     /// Does not bother attaching view controller to hierarchy.
     public override func prepareForInterfaceBuilder() {
@@ -326,6 +347,9 @@ extension UIViewController {
             } else {
                 childController.findChildViewControllerType(controllerType, apply: apply)
             }
+        }
+        if let foundController = self as? T {
+            apply(foundController)
         }
     }
 }

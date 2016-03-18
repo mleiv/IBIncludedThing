@@ -1,6 +1,6 @@
 //
 //  Flow2Controller.swift
-//  IBIncludedStoryboardDemo
+//  IBIncludedThingDemo
 //
 //  Created by Emily Ivie on 2/21/16.
 //  Copyright © 2016 urdnot. All rights reserved.

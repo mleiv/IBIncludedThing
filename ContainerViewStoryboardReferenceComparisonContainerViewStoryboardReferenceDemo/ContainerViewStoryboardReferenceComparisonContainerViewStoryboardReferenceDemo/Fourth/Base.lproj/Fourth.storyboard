@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xbV-KT-KmE">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Fourth Controller-->
+        <scene sceneID="o1c-kx-Xcu">
+            <objects>
+                <viewController id="xbV-KT-KmE" customClass="FourthController" customModule="ContainerViewStoryboardReferenceComparisonContainerViewStoryboardReferenceDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Fj-fk-7zn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iyz-L4-rFl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A1S-YO-g8o">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yTL-bf-Vob">
+                                <rect key="frame" x="30" y="82" width="540" height="437"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Flow, Second Scene" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYH-zn-ryh">
+                                        <rect key="frame" x="103" y="0.0" width="334" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value sent from Third: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TM-MS-XPw">
+                                        <rect key="frame" x="169" y="43" width="203" height="20"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2CS-Al-4Pe">
+                                        <rect key="frame" x="0.0" y="73" width="540" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="BW1-9z-tDr"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="T2A-k0-V1C" kind="embed" identifier="Embed Fifth" id="g9F-fk-oDp"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5c-sT-oeu">
+                                        <rect key="frame" x="0.0" y="143" width="540" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="a7I-N6-XAE"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="Nok-qN-mqp" kind="embed" identifier="Embed Sixth" id="ajT-bX-C6i"/>
+                                        </connections>
+                                    </containerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type value here to share it:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-7l-FYy">
+                                        <rect key="frame" x="199" y="303" width="143" height="14"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IpC-aF-cn0">
+                                        <rect key="frame" x="145" y="327" width="250" height="30"/>
+                                        <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="bez-Fn-U9G"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDE-00-kmQ">
+                                        <rect key="frame" x="135" y="367" width="271" height="30"/>
+                                        <state key="normal" title="Share With Sixth (No nibs allowed here)">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareWithSixth:" destination="xbV-KT-KmE" eventType="touchUpInside" id="KKJ-sB-7KY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YuW-Po-4Ay">
+                                        <rect key="frame" x="181" y="407" width="178" height="30"/>
+                                        <state key="normal" title="Open Seventh Storyboard">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openSeventhPage:" destination="xbV-KT-KmE" eventType="touchUpInside" id="tFB-Vp-9U3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yTL-bf-Vob" firstAttribute="centerY" secondItem="A1S-YO-g8o" secondAttribute="centerY" id="BTM-to-1dE"/>
+                            <constraint firstItem="s5c-sT-oeu" firstAttribute="width" secondItem="A1S-YO-g8o" secondAttribute="width" multiplier="0.9" id="VjQ-E9-WTh"/>
+                            <constraint firstItem="2CS-Al-4Pe" firstAttribute="width" secondItem="A1S-YO-g8o" secondAttribute="width" multiplier="0.9" id="X0W-ss-md0"/>
+                            <constraint firstItem="yTL-bf-Vob" firstAttribute="centerX" secondItem="A1S-YO-g8o" secondAttribute="centerX" id="uOA-ws-0Ht"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="0TM-MS-XPw" id="QJh-QO-rPW"/>
+                        <outlet property="sixthIncludedThing" destination="s5c-sT-oeu" id="pge-8t-VRA"/>
+                        <outlet property="textField" destination="IpC-aF-cn0" id="sHZ-cv-Ngo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QT3-uZ-SKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="295" y="280"/>
+        </scene>
+        <!--Fifth-->
+        <scene sceneID="EuW-R1-DLv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Fifth" id="T2A-k0-V1C" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pIc-pm-pI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="728.5" y="252"/>
+        </scene>
+        <!--Sixth-->
+        <scene sceneID="JQT-nH-pNg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Sixth" id="Nok-qN-mqp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIF-0g-Cv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="730" y="306"/>
+        </scene>
+    </scenes>
+</document>
