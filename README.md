@@ -10,7 +10,7 @@ I added some functions to allow you to change the included pages at will.
 ```swift
 	myIBIncludedStorboard.reloadWithNewStoryboard(incStoryboard: "newStoryboard", sceneId: "newScene")
 	myIBIncludedNib.reloadWithNewNib(incNib: "newNib", nibController: "newController")
-
+```
 
 
 ## Including in Your App
