@@ -19,8 +19,8 @@ class SixthController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController.findChildViewControllerType(SeventhController.self) { controller in
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.findChildViewControllerType(SeventhController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }

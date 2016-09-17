@@ -15,8 +15,8 @@ class ThirdController: UIViewController {
     
     var sentValue: String = "None"
 
-    @IBAction func openFourthPage(sender: UIButton) {
-        parentViewController?.performSegueWithIdentifier("Push Fourth", sender: sender)
+    @IBAction func openFourthPage(_ sender: UIButton) {
+        parent?.performSegue(withIdentifier: "Push Fourth", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -24,8 +24,8 @@ class ThirdController: UIViewController {
         label?.text = "Value sent from Second: \(!sentValue.isEmpty ? sentValue : "None")"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController.findChildViewControllerType(FourthController.self) { controller in
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.findChildViewControllerType(FourthController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }

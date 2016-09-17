@@ -15,12 +15,12 @@ class SecondController: UIViewController {
     
     var sentValue: String = "None"
 
-    @IBAction func openThirdPage(sender: UIButton) {
-        parentViewController?.performSegueWithIdentifier("Push Third", sender: sender)
+    @IBAction func openThirdPage(_ sender: UIButton) {
+        parent?.performSegue(withIdentifier: "Push Third", sender: sender)
     }
     
-    @IBAction func openThirdPageAlt(sender: UIButton) {
-        parentViewController?.performSegueWithIdentifier("Push Third (alternate with Storyboard reference)", sender: sender)
+    @IBAction func openThirdPageAlt(_ sender: UIButton) {
+        parent?.performSegue(withIdentifier: "Push Third (alternate with Storyboard reference)", sender: sender)
     }
 
     override func viewDidLoad() {
@@ -28,8 +28,8 @@ class SecondController: UIViewController {
         label?.text = "Value sent from First: \(!sentValue.isEmpty ? sentValue : "None")"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController.findChildViewControllerType(ThirdController.self) { controller in
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.findChildViewControllerType(ThirdController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }

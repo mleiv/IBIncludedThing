@@ -9,7 +9,7 @@
 import Foundation
 
 class Flow2Controller: IBIncludedThing {
-    @IBAction func close(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func close(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -16,15 +16,15 @@ class FourthController: UIViewController {
     
     var sentValue: String = "None"
     
-    @IBAction func shareWithSixth(sender: UIButton) {
+    @IBAction func shareWithSixth(_ sender: UIButton) {
         findChildViewControllerType(SixthController.self) { controller in
             controller.sentValue = self.textField.text ?? ""
         }
         //also would work: sixthIncludedThing.includedController as? SixthController 
     }
     
-    @IBAction func openSeventhPage(sender: UIButton) {
-        parentViewController?.performSegueWithIdentifier("Push Seventh", sender: sender)
+    @IBAction func openSeventhPage(_ sender: UIButton) {
+        parent?.performSegue(withIdentifier: "Push Seventh", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -32,9 +32,9 @@ class FourthController: UIViewController {
         label?.text = "Value sent from Third: \(!sentValue.isEmpty ? sentValue : "None")"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // option 1:
-        sixthIncludedThing.includedController?.prepareForSegue(segue, sender: sender)
+        sixthIncludedThing.includedController?.prepare(for: segue, sender: sender)
         // option 2:
 //        let value = (sixthIncludedThing.includedController as? SixthController)?.textField?.text ?? ""
 //        segue.destinationViewController.findChildViewControllerType(SeventhController.self) { controller in

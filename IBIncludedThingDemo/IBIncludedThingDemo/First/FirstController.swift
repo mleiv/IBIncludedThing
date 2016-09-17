@@ -12,12 +12,12 @@ class FirstController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
 
-    @IBAction func openSecondPage(sender: UIButton) {
-        parentViewController?.performSegueWithIdentifier("Push Second", sender: sender)
+    @IBAction func openSecondPage(_ sender: UIButton) {
+        parent?.performSegue(withIdentifier: "Push Second", sender: sender)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController.findChildViewControllerType(SecondController.self) { controller in
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.findChildViewControllerType(SecondController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }
