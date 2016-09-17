@@ -25,7 +25,7 @@ class ThirdController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        segue.destination.findChildViewControllerType(FourthController.self) { controller in
+        segue.destination.find(controllerType: FourthController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }

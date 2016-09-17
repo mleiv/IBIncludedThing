@@ -11,14 +11,23 @@
 import UIKit
 
 /// Allows for removing individual scene design from the flow storyboards and into individual per-controller storyboards, which minimizes git merge conflicts.
+// *NOT* @IBDesignable - we only use preview for IB preview
 open class IBIncludedThing: UIViewController, IBIncludedThingLoadable {
 
     @IBInspectable
-    open var incStoryboard: String?
+    open var incStoryboard: String? // abbreviated for shorter label in IB
+    open var includedStoryboard: String? {
+        get { return incStoryboard }
+        set { incStoryboard = newValue }
+    }
     @IBInspectable
     open var sceneId: String?
     @IBInspectable
-    open var incNib: String?
+    open var incNib: String? // abbreviated for shorter label in IB
+    open var includedNib: String? {
+        get { return incNib }
+        set { incNib = newValue }
+    }
     @IBInspectable
     open var nibController: String?
     
@@ -28,12 +37,12 @@ open class IBIncludedThing: UIViewController, IBIncludedThingLoadable {
     /// Typical initialization of IBIncludedThing when it is created during normal scene loading at run time.
     open override func awakeFromNib() {
         super.awakeFromNib()
-        attachThing(toController: self, toView: nil)
+        attach(toController: self, toView: nil)
     }
     
     open override func loadView() {
         super.loadView()
-        attachThing(toController: nil, toView: self.view)
+        attach(toController: nil, toView: self.view)
     }
     
     open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,7 +51,7 @@ open class IBIncludedThing: UIViewController, IBIncludedThingLoadable {
         // The following code will run prepareForSegue in all child view controllers. 
         // This can cause unexpected multiple calls to prepareForSegue, so I prefer to be more cautious about which view controllers invoke prepareForSegue.
         // See IBIncludedThingDemo FourthController and SixthController for examples and options with embedded view controllers.
-//        includedController?.findChildViewControllerType(UIViewController.self) { controller in
+//        includedController?.findType(UIViewController.self) { controller in
 //            controller.prepareForSegue(segue, sender: sender)
 //        }
     }
@@ -55,17 +64,25 @@ open class IBIncludedThing: UIViewController, IBIncludedThingLoadable {
 open class IBIncludedThingPreview: UIView, IBIncludedThingLoadable {
 
     @IBInspectable
-    open var incStoryboard: String?
+    open var incStoryboard: String? // abbreviated for shorter label in IB
+    open var includedStoryboard: String? {
+        get { return incStoryboard }
+        set { incStoryboard = newValue }
+    }
     @IBInspectable
     open var sceneId: String?
     @IBInspectable
-    open var incNib: String?
+    open var incNib: String? // abbreviated for shorter label in IB
+    open var includedNib: String? {
+        get { return incNib }
+        set { incNib = newValue }
+    }
     @IBInspectable
     open var nibController: String?
 
     override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        attachThing(toController: nil, toView: self)
+        attach(toController: nil, toView: self)
     }
     
     // protocol conformance only (does not use):
@@ -78,11 +95,19 @@ open class IBIncludedThingPreview: UIView, IBIncludedThingLoadable {
 open class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
 
     @IBInspectable
-    open var incStoryboard: String?
+    open var incStoryboard: String? // abbreviated for shorter label in IB
+    open var includedStoryboard: String? {
+        get { return incStoryboard }
+        set { incStoryboard = newValue }
+    }
     @IBInspectable
     open var sceneId: String?
     @IBInspectable
-    open var incNib: String?
+    open var incNib: String? // abbreviated for shorter label in IB
+    open var includedNib: String? {
+        get { return incNib }
+        set { incNib = newValue }
+    }
     @IBInspectable
     open var nibController: String?
     
@@ -106,7 +131,7 @@ open class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
 //        }
 //        // then also pin this IBIncludedSubThing to a parent view if so requested:
 //        if let view = parentView ?? parentController?.view {
-//            attachThingControllerView(self, toView: view)
+//            attach(incView: self, toView: view)
 //        }
 //    }
 //
@@ -118,22 +143,22 @@ open class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
     /// Does not bother attaching view controller to hierarchy.
     open override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        attachThing(toController: nil, toView: self)
+        attach(toController: nil, toView: self)
     }
 
     /// Typical initialization of IBIncludedSubThing when it is created during normal scene loading at run time.
     open override func awakeFromNib() {
         super.awakeFromNib()
         if parentController == nil {
-            parentController = findParentViewController(activeViewController(topViewController()))
+            parentController = findParent(ofController: activeController(under: topController()))
         }
-        attachThing(toController: parentController, toView: self)
+        attach(toController: parentController, toView: self)
     }
     
     // And then we need all these to get parent controller:
     
     /// Grabs access to view controller hierarchy if possible.
-    fileprivate func topViewController() -> UIViewController? {
+    fileprivate func topController() -> UIViewController? {
         if let controller = window?.rootViewController {
             return controller
         } else if let controller = UIApplication.shared.keyWindow?.rootViewController {
@@ -143,45 +168,45 @@ open class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
     }
     
     /// Locates the top-most currently visible controller.
-    fileprivate func activeViewController(_ controller: UIViewController?) -> UIViewController? {
+    fileprivate func activeController(under controller: UIViewController?) -> UIViewController? {
         guard let controller = controller else {
             return nil
         }
         if let tabController = controller as? UITabBarController, let nextController = tabController.selectedViewController {
-            return activeViewController(nextController)
+            return activeController(under: nextController)
         } else if let navController = controller as? UINavigationController, let nextController = navController.visibleViewController {
-            return activeViewController(nextController)
+            return activeController(under: nextController)
         } else if let nextController = controller.presentedViewController {
-            return activeViewController(nextController)
+            return activeController(under: nextController)
         }
         return controller
     }
     
     /// Locates the view controller with this view inside of it (depth first, since in a hierarchy of view controllers the view would likely be in all the parentViewControllers of its view controller).
-    fileprivate func findParentViewController(_ topController: UIViewController!) -> UIViewController? {
+    fileprivate func findParent(ofController topController: UIViewController!) -> UIViewController? {
         if topController == nil {
             return nil
         }
         for viewController in topController.childViewControllers {
             // first try, deep dive into child controllers
-            if let parentViewController = findParentViewController(viewController) {
+            if let parentViewController = findParent(ofController: viewController) {
                 return parentViewController
             }
         }
         // second try, top view controller (most generic, most things will be in this view)
-        if let topView = topController?.view , findSelfInViews(topView) {
+        if let topView = topController?.view , findSelf(inView: topView) {
             return topController
         }
         return nil
     }
 
     /// Identifies if the IBIncludedSubThing view is equal to or under the view given.
-    fileprivate func findSelfInViews(_ topView: UIView) -> Bool {
+    fileprivate func findSelf(inView topView: UIView) -> Bool {
         if topView == self || topView == self.superview {
             return true
         } else {
             for view in topView.subviews {
-                if findSelfInViews(view ) {
+                if findSelf(inView: view ) {
                     return true
                 }
             }
@@ -194,58 +219,58 @@ open class IBIncludedSubThing: UIView, IBIncludedThingLoadable {
 /// This holds all the shared functionality of the IBIncludedThing variants.
 public protocol IBIncludedThingLoadable: class {
     // defining properties:
-    var incStoryboard: String? { get set }
+    var includedStoryboard: String? { get set }
     var sceneId: String? { get set }
-    var incNib: String? { get set }
+    var includedNib: String? { get set }
     var nibController: String? { get set }
     // reference:
     weak var includedController: UIViewController? { get set }
     // main:
-    func attachThing(toController parentController: UIViewController?, toView parentView: UIView?)
-    func detachThing()
+    func attach(toController parentController: UIViewController?, toView parentView: UIView?)
+    func detach()
     // supporting:
-    func getThingController(inBundle bundle: Bundle) -> UIViewController?
-    func attachThingController(_ controller: UIViewController?, toParent parentController: UIViewController?)
-    func attachThingControllerView(_ includedView: UIView?, toView view: UIView)
+    func getController(inBundle bundle: Bundle) -> UIViewController?
+    func attach(controller: UIViewController?, toParent parentController: UIViewController?)
+    func attach(view: UIView?, toView parentView: UIView)
     // useful:
-    func reloadWithNewStoryboard(_ incStoryboard: String, sceneId: String?)
-    func reloadWithNewNib(_ incNib: String, nibController: String?)
+    func reload(includedStoryboard: String, sceneId: String?)
+    func reload(includedNib: String, nibController: String?)
 }
 
 extension IBIncludedThingLoadable {
     
     /// Main function to attach the included content.
-    public func attachThing(toController parentController: UIViewController?, toView parentView: UIView?) {
-        guard let includedController = includedController ?? getThingController(inBundle: Bundle(for: type(of: self))) else {
+    public func attach(toController parentController: UIViewController?, toView parentView: UIView?) {
+        guard let includedController = includedController ?? getController(inBundle: Bundle(for: type(of: self))) else {
             return
         }
         if let parentController = parentController {
-            attachThingController(includedController, toParent: parentController)
+            attach(controller: includedController, toParent: parentController)
         }
         if let parentView = parentView {
-            attachThingControllerView(includedController.view, toView: parentView)
+            attach(view: includedController.view, toView: parentView)
         }
     }
     
     /// Main function to remove the included content.
-    public func detachThing() {
+    public func detach() {
         includedController?.view.removeFromSuperview()
         includedController?.removeFromParentViewController()
-        self.incStoryboard = nil
+        self.includedStoryboard = nil
         self.sceneId = nil
-        self.incNib = nil
+        self.includedNib = nil
         self.nibController = nil
     }
     
     /// Internal: loads the controller from the storyboard or nib
-    public func getThingController(inBundle bundle: Bundle) -> UIViewController? {
+    public func getController(inBundle bundle: Bundle) -> UIViewController? {
         var foundController: UIViewController?
-        if let storyboardName = self.incStoryboard {
+        if let storyboardName = self.includedStoryboard {
             // load storyboard
             let storyboardObj = UIStoryboard(name: storyboardName, bundle: bundle)
             let sceneId = self.sceneId ?? ""
             foundController = sceneId.isEmpty ? storyboardObj.instantiateInitialViewController() : storyboardObj.instantiateViewController(withIdentifier: sceneId)
-        } else if let nibName = self.incNib {
+        } else if let nibName = self.includedNib {
             // load nib
             if let controllerName = nibController,
                 let appName = bundle.object(forInfoDictionaryKey: "CFBundleName") as? String {
@@ -263,7 +288,7 @@ extension IBIncludedThingLoadable {
     }
     
     /// Internal: inserts the included controller into the view hierarchy (this helps trigger correct view hierarchy lifecycle functions)
-    public func attachThingController(_ controller: UIViewController?, toParent parentController: UIViewController?) {
+    public func attach(controller: UIViewController?, toParent parentController: UIViewController?) {
         // save for later (do not explicitly reference view or you will trigger viewDidLoad)
         guard let controller = controller, let parentController = parentController else {
             return
@@ -277,62 +302,62 @@ extension IBIncludedThingLoadable {
     }
     
     /// Internal: inserts the included view inside the IBIncludedThing view. Makes this nesting invisible by removing any background on IBIncludedThing and sets constraints so included content fills IBIncludedThing.
-    public func attachThingControllerView(_ includedView: UIView?, toView view: UIView) {
-        guard let includedView = includedView else {
+    public func attach(view: UIView?, toView parentView: UIView) {
+        guard let view = view else {
             return
         }
-        view.addSubview(includedView)
+        parentView.addSubview(view)
         
         //clear out top-level view visibility, so only subview shows
-        view.isOpaque = false
-        view.backgroundColor = UIColor.clear
+        parentView.isOpaque = false
+        parentView.backgroundColor = UIColor.clear
         
         //tell child to fit itself to the edges of wrapper (self)
-        includedView.translatesAutoresizingMaskIntoConstraints = false
-        includedView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        includedView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        includedView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        includedView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: parentView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: parentView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: parentView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: parentView.trailingAnchor).isActive = true
     }
     
     /// Programmatic reloading of a storyboard inside the same IBIncludedSubThing view.
     /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
-    public func reloadWithNewStoryboard(_ incStoryboard: String, sceneId: String?) {
+    public func reload(includedStoryboard: String, sceneId: String?) {
         let parentController = (self as? IBIncludedThing) ?? (self as? IBIncludedSubThing)?.parentController
-        guard incStoryboard != self.incStoryboard || sceneId != self.sceneId,
+        guard includedStoryboard != self.includedStoryboard || sceneId != self.sceneId,
             let parentView = (self as? IBIncludedSubThing) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        detachThing()
+        detach()
         self.includedController = nil
         // reset to new values
-        self.incStoryboard = incStoryboard
+        self.includedStoryboard = includedStoryboard
         self.sceneId = sceneId
-        self.incNib = nil
+        self.includedNib = nil
         self.nibController = nil
         // reload
-        attachThing(toController: parentController, toView: parentView)
+        attach(toController: parentController, toView: parentView)
     }
     
     /// Programmatic reloading of a nib inside the same IBIncludedSubThing view.
     /// parentController is only necessary when the storyboard has had no previous storyboard, and so is missing an included controller (and its parent).
-    public func reloadWithNewNib(_ incNib: String, nibController: String?) {
+    public func reload(includedNib: String, nibController: String?) {
         let parentController = (self as? IBIncludedThing) ?? (self as? IBIncludedSubThing)?.parentController
-        guard incNib != self.incNib || nibController != self.nibController,
+        guard includedNib != self.includedNib || nibController != self.nibController,
             let parentView = (self as? IBIncludedSubThing) ?? parentController?.view else {
             return
         }
         // cleanup old stuff
-        detachThing()
+        detach()
         self.includedController = nil
         // reset to new values
-        self.incStoryboard = nil
+        self.includedStoryboard = nil
         self.sceneId = nil
-        self.incNib = incNib
+        self.includedNib = includedNib
         self.nibController = nibController
         // reload
-        attachThing(toController: parentController, toView: parentView)
+        attach(toController: parentController, toView: parentView)
     }
     
 }
@@ -340,12 +365,12 @@ extension IBIncludedThingLoadable {
 extension UIViewController {
     
     /// A convenient utility for quickly running some code on a view controller of a specific type in the current view controller hierarchy.
-    public func findChildViewControllerType<T: UIViewController>(_ controllerType: T.Type, apply: ((T) -> Void)) {
+    public func find<T: UIViewController>(controllerType: T.Type, apply: ((T) -> Void)) {
         for childController in childViewControllers {
             if let foundController = childController as? T {
                 apply(foundController)
             } else {
-                childController.findChildViewControllerType(controllerType, apply: apply)
+                childController.find(controllerType: controllerType, apply: apply)
             }
         }
         if let foundController = self as? T {

@@ -4,12 +4,17 @@
 
 Storyboards can easily get too large and they are slow and difficult to collaborate on without conflicts. IBIncludedThing allows developers to break up their application into sensible chunks and link the storyboards visually. It also allows for embedding of nibs and storyboards inside other content, and provides a mechanism for easily locating child controllers to configure data.
 
+## News 2016-09-17
+
+Moved project to Swift 3. Changed functions to be more Swifty in naming - attachThing:toController -> attach(toController, attachThingController -> attach:controller, attachThingControllerView -> attach:view, reloadWithNewStoryboard -> reload:includedStoryboard, reloadWithNewNib -> reload:includedNib.
+
+
 ## News 2016-03-18
 
 I added some functions to allow you to change the included pages at will.
 ```swift
-	myIBIncludedStorboard.reloadWithNewStoryboard(incStoryboard: "newStoryboard", sceneId: "newScene")
-	myIBIncludedNib.reloadWithNewNib(incNib: "newNib", nibController: "newController")
+	myIBIncludedStorboard.reload(includedStoryboard: "newStoryboard", sceneId: "newScene")
+	myIBIncludedNib.reload(includedNib: "newNib", nibController: "newController")
 ```
 
 
@@ -38,19 +43,19 @@ Because IBIncludedThing's included content is a *child* view controller of the m
 
 ```swift
 @IBAction func clickedButton(sender: UIButton) {
-    parentViewController?.performSegueWithIdentifier("SEGUE NAME", sender: sender)
+    parentViewController?.performSegue(withIdentifier: "SEGUE NAME", sender: sender)
 }
 ```
 
 *Note: if you are embedded multiple levels down (say, by using IBIncludedSubThing, or by trying to call a segue in Flow1 from Flow2), you may need to chain multiple parentViewControllers to get to the one you want.*
 
-## Using prepareForSegue
+## Using prepare:for
 
 Often, prepareForSegue is used to share data between view controllers. Because IBIncludedThing's included content is a child view of the root, it is not immediately accessible in prepareForSegue. But it just takes a bit more code to locate and share data with the included content.
 
 ```swift
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        segue.destinationViewController?.findChildViewControllerType(SecondController.self) { controller in
+override func prepare(for: UIStoryboardSegue, sender: AnyObject?) {
+        segue.destinationViewController?.find(controllerType: SecondController.self) { controller in
             controller.sentValue = self.textField?.text
         }
     }

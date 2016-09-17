@@ -19,11 +19,24 @@ class SixthController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textField.delegate = self
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        segue.destination.findChildViewControllerType(SeventhController.self) { controller in
+        segue.destination.find(controllerType: SeventhController.self) { controller in
             controller.sentValue = self.textField?.text ?? ""
         }
     }
 
     // Unfortunately, due to the late stage that these embedded views are included in the parent scene, they cannot use prepareForSegue. You can, however, use the sharing method demonstrated here between 4th and 6th to ferry data  from the scene loaded before prepareForSegue down to the view loaded later.
+
+}
+
+extension SixthController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
